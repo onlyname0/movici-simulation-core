@@ -2,31 +2,31 @@
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
-[tool.black]
-line-length = 99
-include = '\.pyi?$'
-exclude = '''(
-/(
-  | \.direnv
-  | \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
+[tool.ruff]
+line-length = 100
+target-version = "py38"
 
-)/
-)
-'''
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "E741",  # ambiguous variable name
+    "W503",  # line break before binary operator
+    "E203",  # whitespace before ':'
+]
 
-[tool.isort]
-profile = "black"
-line_length = 99
-known_first_party = ["movici_simulation_core"]
+[tool.ruff.lint.isort]
+known-first-party = ["movici_simulation_core"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
 
 [tool.pytest.ini_options]
 minversion = "6.0"

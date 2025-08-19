@@ -1,0 +1,5 @@
+# Ruff configuration file
+# This file can be used for project-specific overrides
+# Main configuration is in pyproject.toml
+
+extend = "pyproject.toml"
