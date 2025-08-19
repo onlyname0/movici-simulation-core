@@ -77,10 +77,8 @@ setup(
             f"orchestrator = {SVC_PATH}.orchestrator.service:Orchestrator",
             f"update_data_service = {SVC_PATH}.update_data.service:UpdateDataService",
             f"init_data_service = {SVC_PATH}.init_data.service:InitDataService",
-
             "global_attributes = movici_simulation_core.attributes:GlobalAttributes",
             "common_attributes = movici_simulation_core.models.common.attributes:CommonAttributes",
-
             f"area_aggregation = {MODEL_PATH}.area_aggregation.model:Model",
             f"corridor = {MODEL_PATH}.corridor.model:Model",
             f"csv_player = {MODEL_PATH}.csv_player.csv_player:CSVPlayer",

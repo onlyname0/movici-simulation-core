@@ -108,9 +108,7 @@ class NearestValue(LocalEffectsContributor):
     def _calculate_values_csr(self):
         matrix = self._attribute.csr.as_matrix()
         if matrix.shape[0] != matrix.shape[1]:
-            raise ValueError(
-                "Only square CSR matrices are supported for nearest value calculation"
-            )
+            raise ValueError("Only square CSR matrices are supported for nearest value calculation")
         return matrix[:, self._indices][self._indices, :]
 
     def calculate_contribution(self, new_values, old_values):
@@ -239,10 +237,8 @@ class RouteCostFactor(LocalEffectsContributor, ShortestPathMixin):
         ids = self._demand_nodes.index.ids
 
         dists = self._network.all_shortest_paths(ids[unique_indices])
-        for (x, y) in zip(*np.where(dists == np.inf)):
-            self._logger.debug(
-                f"Nodes {ids[x]}-{ids[y]} " f"do not have a valid path between them."
-            )
+        for x, y in zip(*np.where(dists == np.inf)):
+            self._logger.debug(f"Nodes {ids[x]}-{ids[y]} do not have a valid path between them.")
         dists[np.where(dists == np.inf)] = 1e14
         return dists
 

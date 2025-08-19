@@ -48,7 +48,6 @@ class SimpleModel(TrackedModel):
         )
 
     def initialize(self, state: TrackedState):
-
         state.receive_update(
             {
                 "dataset": {
@@ -90,7 +89,7 @@ class DummyService(Service):
         settings: Settings,
         stream: Stream,
         logger: logging.Logger,
-        socket: MessageRouterSocket
+        socket: MessageRouterSocket,
     ):
         pass
 

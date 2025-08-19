@@ -181,9 +181,7 @@ class ModelTester:
         return self.model.update(message, data)
 
     def update_series(self, timestamp: int, data_series: t.Sequence[UpdateData], **msg_kwargs):
-        message = UpdateSeriesMessage(
-            [UpdateMessage(timestamp, **msg_kwargs) for _ in data_series]
-        )
+        message = UpdateSeriesMessage([UpdateMessage(timestamp, **msg_kwargs) for _ in data_series])
         return self.model.update_series(message, data_series)
 
     def new_time(self, timestamp: int):
@@ -259,7 +257,7 @@ def compare_results(
 ) -> ErrorList:
     if len(expected) != len(results):
         raise ValueError(
-            f"Length of results [{len(results)}" f" doesnt match expected [{len(expected)}"
+            f"Length of results [{len(results)} doesnt match expected [{len(expected)}"
         )
     errors = []
     for (t_result, result, nt_result), (t_expected, expected_data, nt_expected) in zip(

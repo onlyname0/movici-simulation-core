@@ -405,9 +405,7 @@ def test_run_simulation(run_orchestrator):
         # info about model_a
         (
             "model_b",
-            UpdateSeriesMessage(
-                [UpdateMessage(0), UpdateMessage(0, key="a", address="address_a")]
-            ),
+            UpdateSeriesMessage([UpdateMessage(0), UpdateMessage(0, key="a", address="address_a")]),
         ),
         # 4) orchestrator sends update to model_c with info about model_b
         ("model_c", UpdateMessage(0, key="b", address="address_b")),

@@ -55,7 +55,6 @@ class ProjectWrapper:
         project_name: t.Optional[str] = None,
         delete_on_close: bool = True,
     ) -> None:
-
         self._delete_on_close = delete_on_close
 
         if project_path is None:
@@ -103,7 +102,7 @@ class ProjectWrapper:
                 self._project = None
             if self._delete_on_close and self.project_dir.exists():
                 shutil.rmtree(self.project_dir)
-        except IOError:
+        except OSError:
             pass
 
     def add_nodes(self, nodes: NodeCollection) -> None:
@@ -155,9 +154,7 @@ class ProjectWrapper:
         linestring_strs = []
         geometries = np.round(
             np.column_stack(
-                self.transformer.transform(
-                    links.geometries.data[:, 0], links.geometries.data[:, 1]
-                )
+                self.transformer.transform(links.geometries.data[:, 0], links.geometries.data[:, 1])
             ),
             decimals=GEOM_ACC,
         )
@@ -209,9 +206,7 @@ class ProjectWrapper:
         link_id = self._link_id_generator.query_original_ids(link_id)
         a_node = self._node_id_generator.query_original_ids(a_node)
         b_node = self._node_id_generator.query_original_ids(b_node)
-        return LinkCollection(
-            ids=link_id, from_nodes=a_node, to_nodes=b_node, directions=direction
-        )
+        return LinkCollection(ids=link_id, from_nodes=a_node, to_nodes=b_node, directions=direction)
 
     def _get_linestring_string(
         self,
@@ -277,7 +272,8 @@ class ProjectWrapper:
                 values = values.tolist()
 
             cursor.executemany(
-                f"UPDATE links SET {column_name}=? WHERE link_id=?", zip(values, ids)  # nosec
+                f"UPDATE links SET {column_name}=? WHERE link_id=?",
+                zip(values, ids),  # nosec
             )
 
             self._db.commit()

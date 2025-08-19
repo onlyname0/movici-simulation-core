@@ -105,9 +105,9 @@ class PublishAttribute:
 
 class ModalityStrategy:
     transport_type: str
-    transport_segment_entity: t.Type[
+    transport_segment_entity: t.Type[ds.TrafficTransportSegmentEntity] = (
         ds.TrafficTransportSegmentEntity
-    ] = ds.TrafficTransportSegmentEntity
+    )
     publish_attributes: t.Sequence[PublishAttribute] = (
         PublishAttribute("passenger_flow"),
         PublishAttribute("cargo_flow"),
@@ -124,7 +124,6 @@ class ModalityStrategy:
         model.cargo_pcu = model.config.get("cargo_pcu", default_parameters.cargo_pcu)
 
     def setup_state(self, model: Model, state: TrackedState, dataset_name: str):
-
         model.transport_segments = state.register_entity_group(
             dataset_name,
             self.transport_segment_entity(
@@ -334,9 +333,7 @@ class CargoTrackModality(TrackModality):
             return super().get_capacities(model)
         cargo_allowed = ae_util.get_cargo_allowed_from_attribute(attr)
 
-        capacities = np.full_like(
-            model.transport_segments.capacity, fill_value=np.inf, dtype=float
-        )
+        capacities = np.full_like(model.transport_segments.capacity, fill_value=np.inf, dtype=float)
         capacities[np.nonzero(~cargo_allowed)] = ae_util.eps
         return capacities
 

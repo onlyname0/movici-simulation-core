@@ -97,9 +97,7 @@ class EntityInitDataFormat(ExternalSerializationStrategy):
         else:
             raise TypeError("attribute data must be list")
 
-    def dumps(
-        self, dataset: dict, filetype: t.Optional[FileType] = FileType.JSON, **kwargs
-    ) -> str:
+    def dumps(self, dataset: dict, filetype: t.Optional[FileType] = FileType.JSON, **kwargs) -> str:
         self.supported_file_type_or_raise(filetype)
         list_data = self.dump_dict(dataset)
         if filetype is FileType.JSON:

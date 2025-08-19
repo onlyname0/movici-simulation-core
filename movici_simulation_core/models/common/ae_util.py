@@ -39,9 +39,7 @@ def get_capacities_from_attribute(
 
 def get_max_speeds_from_attribute(max_speed_attribute: UniformAttribute) -> np.ndarray:
     max_speeds = max_speed_attribute.array.copy()
-    max_speeds[max_speed_attribute.is_special() | max_speed_attribute.is_undefined()] = float(
-        "inf"
-    )
+    max_speeds[max_speed_attribute.is_special() | max_speed_attribute.is_undefined()] = float("inf")
 
     return max_speeds
 
@@ -58,7 +56,6 @@ def get_transport_directions(segments: TransportSegmentEntity) -> np.ndarray:
 
 
 def get_nodes(nodes: PointEntity, point_generator: PointGenerator) -> NodeCollection:
-
     geometries = []
     for node_x, node_y in zip(nodes.x, nodes.y):
         geometry = point_generator.generate_and_add([node_x, node_y])

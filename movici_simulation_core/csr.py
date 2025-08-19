@@ -58,7 +58,6 @@ def row_wise_max(data, row_ptr, empty_row=None):
     assert_numeric_array(data)
 
     def impl(data, row_ptr, empty_row=None):
-
         if empty_row is None:
             return reduce_rows(data, row_ptr, np.max)
 
@@ -72,7 +71,6 @@ def row_wise_min(data, row_ptr, empty_row=None):
     assert_numeric_array(data)
 
     def impl(data, row_ptr, empty_row=None):
-
         if empty_row is None:
             return reduce_rows(data, row_ptr, np.min)
 
@@ -180,7 +178,6 @@ def remove_undefined_csr(
     num_undefined,
     new_data_shape,
 ) -> t.Tuple[np.ndarray, np.ndarray, np.ndarray]:
-
     new_data = np.empty(new_data_shape, dtype=data.dtype)
     new_row_ptr = np.empty(len(row_ptr) - num_undefined, dtype=row_ptr.dtype)
     new_indices = np.empty(len(indices) - num_undefined, dtype=indices.dtype)

@@ -43,7 +43,6 @@ try:
         PointGeometry,
     )
 except ImportError as e:
-
     ClosedPolygonGeometry = delayed_raise(e)
     Geometry = delayed_raise(e)
     LinestringGeometry = delayed_raise(e)
@@ -54,7 +53,6 @@ try:
     from shapely.geometry import LineString, Point, Polygon
     from shapely.geometry.base import BaseGeometry
 except ImportError as e:
-
     BaseGeometry = delayed_raise(e)
     LineString = delayed_raise(e)
     Point = delayed_raise(e)
@@ -171,8 +169,7 @@ class PolygonEntity(GeometryEntity):
 
     def is_ready(self) -> bool:
         return any(
-            pol.is_initialized()
-            for pol in [self._polygon3d, self._polygon2d, self._polygon_legacy]
+            pol.is_initialized() for pol in [self._polygon3d, self._polygon2d, self._polygon_legacy]
         )
 
     def get_geometry(self, slice=None) -> ClosedPolygonGeometry:
@@ -213,9 +210,7 @@ class GridCellEntity(GeometryEntity):
 
     def is_ready(self):
         return (
-            self.points is not None
-            and self.points.is_ready()
-            and self.grid_points.is_initialized()
+            self.points is not None and self.points.is_ready() and self.grid_points.is_initialized()
         )
 
     def _resolve_polygons(self) -> np.ndarray:

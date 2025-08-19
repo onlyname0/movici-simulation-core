@@ -200,9 +200,7 @@ class TestGeopandasDataSource:
         return create_gdf(
             [
                 Polygon([(0, 0), (1, 0), (1, 1), (0, 1), (0, 0)], {"attr": 10}),
-                Polygon(
-                    [(0.1, 0.1), (0.9, 0.1), (0.9, 0.9), (0.1, 0.9), (0.1, 0.1)], {"attr": 11}
-                ),
+                Polygon([(0.1, 0.1), (0.9, 0.1), (0.9, 0.9), (0.1, 0.9), (0.1, 0.1)], {"attr": 11}),
             ]
         )
 
@@ -1075,7 +1073,6 @@ class TestIDLinking:
     @pytest.fixture
     def prepare_dataset(self, sources):
         def _prepare_dataset(config):
-
             return DatasetCreator(
                 [
                     AttributeDataLoading,

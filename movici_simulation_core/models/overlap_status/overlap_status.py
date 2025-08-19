@@ -100,7 +100,6 @@ class OverlapStatus:
         overlap_active: np.ndarray,
         overlap_entity: OverlapEntity,
     ) -> None:
-
         new_overlaps = np.where(overlap_active)[0]
         if new_overlaps.size == 0:
             return
@@ -136,9 +135,7 @@ class OverlapStatus:
         overlap_entity.display_name[new_overlap_indices] = display_name
         overlap_entity.connection_from_reference[new_overlap_indices] = from_reference
         overlap_entity.connection_to_reference[new_overlap_indices] = to_reference
-        overlap_entity.connection_from_dataset[
-            new_overlap_indices
-        ] = from_entity.state.dataset_name
+        overlap_entity.connection_from_dataset[new_overlap_indices] = from_entity.state.dataset_name
         overlap_entity.connection_to_dataset[new_overlap_indices] = to_entity.state.dataset_name
 
         overlap_entity.connection_from_id[new_overlap_indices] = from_ids
@@ -180,7 +177,6 @@ class OverlapStatus:
         to_entity: GeometryEntity,
         to_index: int,
     ) -> t.Tuple[float, float]:
-
         from_geometry = from_entity.get_single_geometry(from_index)
         to_geometry = to_entity.get_single_geometry(to_index)
 
@@ -209,7 +205,6 @@ class OverlapStatus:
         connections: Connections,
         overlap_entity: OverlapEntity,
     ) -> None:
-
         overlap_undefined_value = overlap_entity.overlap_active.data_type.undefined
 
         overlap_active = self._calculate_active_overlaps(
