@@ -170,6 +170,11 @@ class GeopandasSource(DataSource):
             coords = np.asarray(feat.exterior.coords)
             if coords.shape[1] == 2:
                 size = 2
+            
+            # Ensure polygon is closed by adding first point to end if not already there
+            if not np.array_equal(coords[0], coords[-1]):
+                coords = np.vstack([coords, coords[0:1]])
+            
             all_coordinates.append(coords)
 
         attr = (Geometry_Polygon2d if size == 2 else Geometry_Polygon3d).name
@@ -181,7 +186,9 @@ class GeopandasSource(DataSource):
 
     def get_attribute(self, name: str):
         try:
-            return list(self.gdf[name])
+            result = list(self.gdf[name])
+            # Convert None values to float("NaN") to match expected behavior
+            return [float("NaN") if val is None else val for val in result]
         except KeyError as e:
             raise ValueError(
                 f"'{name}' was not found as a feature property, perhaps it has an "
