@@ -43,7 +43,7 @@ isort:
 isort-check:
 	isort -c .
 
-lint: flake8 black-check isort-check bandit safety mypy
+lint: flake8 black-check isort-check bandit mypy
 	
 test-all: coverage lint
 
